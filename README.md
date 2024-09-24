@@ -1,6 +1,6 @@
 # aider/Ollama Docker Compose Setup
 
-This is a simple Docker Compose setup for running [aider](https://aider.chat/) with local LLM instances via the [Ollama](https://ollama.com/) framwork. 
+This is a simple Docker Compose setup for running [aider](https://aider.chat/) with local LLM instances via the [Ollama](https://ollama.com/) framework. 
 
 Both components already provide official Docker images. This setup makes handling them in parallel a tiny bit more convenient, mainly by putting command line arguments into a configuration file and modifying the entrypoints and commands of the original images.
 
