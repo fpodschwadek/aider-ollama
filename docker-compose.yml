@@ -1,0 +1,47 @@
+services:
+
+  aider:
+    container_name: ao-core
+    depends_on:
+      - llm
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities:
+                - gpu
+    entrypoint: /bin/sh
+    environment:
+      AIDER_MODEL: ollama/${MODEL}
+      OLLAMA_API_BASE: http://llm:11434
+    image: paulgauthier/aider-full
+    networks:
+      - default
+    tty: true
+    user: 1000:1000
+    volumes:
+      - ${PROJECT_PATH}:/app
+
+  llm:
+    command: serve && ollama run ${MODEL}
+    container_name: ao-llm
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities:
+                - gpu
+    expose:
+      - 11434
+    image: ollama/ollama
+    networks:
+      - default
+    volumes:
+      - ./llm:/root/.ollama
+
+networks:
+  default:
