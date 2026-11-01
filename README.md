@@ -11,9 +11,10 @@ By default, the setup runs on the CPU and works on any machine with Docker. GPU 
 1. Clone this repository.
 2. Copy the `.env.example` file to `.env` and adjust the values to your needs.
    - `MODEL` takes a string with a model name that works with Ollama, e.g., `qwen2.5-coder:3b` or `llama3.1:8b` (the parameter size, if available, is part of this string).
-   - `PROJECT_PATH` should be the path to the project folder you want to use with aider. It has to be a git repository. Defaults to `./project`.
+   - `PROJECT_PATH` should be the path to the project folder you want to use with aider. Defaults to `./project`.
    - `CONTEXT_LENGTH` sets Ollama's context window in tokens. Ollama's own default is small, and aider silently loses part of your files if the window is too small.
    - `EDIT_FORMAT` sets aider's edit format. `whole` is more reliable with small models than `diff`.
+   - `GIT` controls whether aider uses git. By default (`false`) it doesn't, so the project folder can be a plain folder and aider makes no commits. Set it to `true` to have aider commit every change to a git repository in `PROJECT_PATH` (this enables `/undo` and `/diff`). The repository must exist and git needs a configured user.
 3. Run `docker compose up -d` to start the application.
 4. To pull a model, run `docker compose exec llm ollama pull { model name }`. You only need to do this once per model you are using (see _Volumes_ below).
 5. To start aider, run `docker compose exec aider aider`. 

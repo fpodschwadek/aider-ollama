@@ -8,6 +8,7 @@ services:
     entrypoint: /bin/sh
     environment:
       AIDER_EDIT_FORMAT: ${EDIT_FORMAT:-whole}
+      AIDER_GIT: ${GIT:-false}
       AIDER_MODEL: ollama/${MODEL:?Set MODEL in .env}
       GIT_CONFIG_COUNT: 1
       GIT_CONFIG_KEY_0: safe.directory
